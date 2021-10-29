@@ -2,14 +2,19 @@ package servlet;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.UsuarioDAO;
 import tablas.Usuarios;
@@ -22,8 +27,10 @@ import tablas.Usuarios;
 @WebServlet ("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static String nombreSi = null;
-	final Date date=new Date();
+	private String nombreSi = null;
+	private  Date date= new Date();
+	
+	
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -49,16 +56,21 @@ public class LoginServlet extends HttpServlet {
 			List <Usuarios> user = UsuarioDAO.getAllUsuario(nombre, pass);
 			for (Usuarios usuarios : user) {
 				if(usuarios.getNombre().equals(nombre) && usuarios.getClave().equals(pass)) {
+					HttpSession s = request.getSession(true);
 					nombreSi=usuarios.getNombre();
-					response.sendRedirect("Menu.jsp");
+					s.setAttribute("usu", nombreSi);
+					LocalDateTime date = LocalDateTime.now();
+					DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss");
+					String dater = date.format(format);
+					s.setAttribute("fecha", dater);
+					
+					RequestDispatcher rd= request.getRequestDispatcher("Menu.jsp");
+					rd.forward(request, response);
+
 				}else response.sendRedirect("Loger.html");
 			}
 		}
 		
-	}
-	
-	public String getNombre() {
-		return nombreSi;
 	}
 	
 	public Date getFecha() {

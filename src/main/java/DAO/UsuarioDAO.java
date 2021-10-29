@@ -9,6 +9,7 @@ import tablas.Usuarios;
 
 
 public class UsuarioDAO {
+	
 	public static List<Usuarios> getAllUsuario(String nombre, String pass) {
 		return getAllUsuario(HibernateUtil.retrieveSession(), nombre, pass);
 	}
