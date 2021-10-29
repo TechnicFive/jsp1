@@ -2,7 +2,7 @@ package servlet;
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-
 import DAO.UsuarioDAO;
+import tablas.Usuarios;
 
 
 
@@ -23,7 +22,9 @@ import DAO.UsuarioDAO;
 @WebServlet ("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     
+	static String nombreSi = null;
+	final Date date=new Date();
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -45,14 +46,23 @@ public class LoginServlet extends HttpServlet {
 		if(nombre==null || pass == null) {
 			response.sendRedirect("Loger.html");
 		}else {
-			boolean user = UsuarioDAO.getAllUsuario(nombre, pass);
-			if(user) {
-				response.sendRedirect("Menu.html");
-			}else response.sendRedirect("Loger.html");
+			List <Usuarios> user = UsuarioDAO.getAllUsuario(nombre, pass);
+			for (Usuarios usuarios : user) {
+				if(usuarios.getNombre().equals(nombre) && usuarios.getClave().equals(pass)) {
+					nombreSi=usuarios.getNombre();
+					response.sendRedirect("Menu.jsp");
+				}else response.sendRedirect("Loger.html");
+			}
 		}
 		
-		
-		
+	}
+	
+	public String getNombre() {
+		return nombreSi;
+	}
+	
+	public Date getFecha() {
+		return date;
 	}
 
 	/**

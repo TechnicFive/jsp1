@@ -9,6 +9,7 @@
 <title>Roles</title>
 </head>
 <body>
+<%@include file="Encabezado.jsp"%>
 	<!-- Scriptlet -->
 		<%
 			//Ahora cargaremos la tabla de roles
