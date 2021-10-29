@@ -12,6 +12,5 @@
 		Nuevo Rol: <input type="text" name="nombre" required="required">
 		<input type="submit" value="Crear">
 	</form>
-	<%@include file="PiePag.jsp"%>
 </body>
 </html>

@@ -15,6 +15,5 @@
 	<form action="verRol" method="get">
 		<input type="submit" value="Ver roles">
 	</form>
-	<%@include file="PiePag.jsp"%>
 </body>
 </html>

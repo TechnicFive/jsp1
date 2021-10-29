@@ -31,6 +31,5 @@
 			</c:forEach>
 		</table>
 		
-	<%@include file="PiePag.jsp"%>
 </body>
 </html>
