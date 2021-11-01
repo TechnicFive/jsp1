@@ -11,16 +11,22 @@
 <body>
 	<% String id=null; %>
 	<% int idd=0; %>
-	<%= id=(String)session.getAttribute("ids") %>
+	<% id=(String)session.getAttribute("ids"); %>
 	<% idd= Integer.parseInt(id); %>
 	
 	<%@include file="Encabezado.jsp"%>
 	<h1>Menu</h1>
 	<form action="newRol" method="get">
-		<input type=<%= (idd<=1)?"button":"hidden" %> value="Crear nuevo Rol">
+		<input type=<%= (idd<=1)?"submit":"hidden" %> value="Crear nuevo Rol">
 	</form>
 	<form action="verRol" method="get">
 		<input type="submit" value="Ver roles">
+	</form>
+	<form action="anadircategorias" method="get">
+		<input type=<%= (idd<=1)?"submit":"hidden" %> value="Añadir categoria">
+	</form>
+	<form action="vercategorias" method="get">
+		<input type="submit" value="Ver categorias">
 	</form>
 </body>
 </html>

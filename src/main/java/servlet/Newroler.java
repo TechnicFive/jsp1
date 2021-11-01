@@ -34,6 +34,7 @@ public class Newroler extends HttpServlet {
 		if(nombre != null)
 		{
 			RolDAO.insertRol(nombre);
+			response.sendRedirect("Nuevorol.jsp");
 		}
 	}
 

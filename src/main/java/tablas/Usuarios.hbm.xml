@@ -9,7 +9,7 @@
    <column name="id"/>
    <generator class="identity"/>
   </id>
-  <property generated="never" lazy="false" name="idRol" type="integer">
+  <property generated="never" lazy="false" name="roles" type="integer">
    <column name="id_rol"/>
   </property>
   <property generated="never" lazy="false" name="email" type="string">

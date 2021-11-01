@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 			for (Usuarios usuarios : user) {
 				if(usuarios.getNombre().equals(nombre) && usuarios.getClave().equals(pass)) {
 					nombreSi=usuarios.getNombre();
-					id = usuarios.getIdRol()+"";
+					id = usuarios.getRoles()+"";
 					s.setAttribute("usu", nombreSi);
 					s.setAttribute("ids", id);
 					LocalDateTime date = LocalDateTime.now();

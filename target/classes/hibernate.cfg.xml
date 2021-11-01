@@ -10,5 +10,6 @@
   <property name="hibernate.connection.password"/>
   <mapping resource="tablas/Usuarios.hbm.xml"/>
   <mapping resource="tablas/Roles.hbm.xml"/>
+  <mapping resource="tablas/Categorias.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
