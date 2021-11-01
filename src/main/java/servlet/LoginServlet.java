@@ -2,7 +2,6 @@ package servlet;
 
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -29,6 +28,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String nombreSi = null;
 	private  Date date= new Date();
+	private String id= null;
 	
 	
 
@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String nombre=request.getParameter("nombre");
 		String pass=request.getParameter("contrasena");
-		
+		HttpSession s = request.getSession(true);
 
 	
 		if(nombre==null || pass == null) {
@@ -56,9 +56,10 @@ public class LoginServlet extends HttpServlet {
 			List <Usuarios> user = UsuarioDAO.getAllUsuario(nombre, pass);
 			for (Usuarios usuarios : user) {
 				if(usuarios.getNombre().equals(nombre) && usuarios.getClave().equals(pass)) {
-					HttpSession s = request.getSession(true);
 					nombreSi=usuarios.getNombre();
+					id = usuarios.getIdRol()+"";
 					s.setAttribute("usu", nombreSi);
+					s.setAttribute("ids", id);
 					LocalDateTime date = LocalDateTime.now();
 					DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyy HH:mm:ss");
 					String dater = date.format(format);
@@ -67,8 +68,10 @@ public class LoginServlet extends HttpServlet {
 					RequestDispatcher rd= request.getRequestDispatcher("Menu.jsp");
 					rd.forward(request, response);
 
-				}else response.sendRedirect("Loger.html");
+				}		
 			}
+			RequestDispatcher rd= request.getRequestDispatcher("Loger.html");
+			rd.forward(request, response);
 		}
 		
 	}
